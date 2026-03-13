@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>London Tech Week 2025 — Keynote Themes & Audience Reaction</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&family=Fraunces:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #0b0f1a;
+    color: #e8eaf0;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Atmospheric background */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse at 15% 10%, rgba(0,119,181,0.12) 0%, transparent 50%),
+      radial-gradient(ellipse at 85% 30%, rgba(99,180,255,0.06) 0%, transparent 40%),
+      radial-gradient(ellipse at 50% 90%, rgba(139,92,246,0.06) 0%, transparent 40%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page { position: relative; z-index: 1; max-width: 940px; margin: 0 auto; padding: 40px 24px 60px; }
+
+  /* ---- HEADER ---- */
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+    padding: 48px 32px 36px;
+    background: linear-gradient(160deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 10%; right: 10%; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(99,180,255,0.3), transparent);
+  }
+
+  .header-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #63b4ff;
+    margin-bottom: 12px;
+  }
+
+  .header h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: -1px;
+    line-height: 1.15;
+    margin-bottom: 8px;
+  }
+
+  .header h1 span { color: #63b4ff; }
+
+  .header .subtitle {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 400;
+    margin-bottom: 28px;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+  }
+
+  .header-stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .header-stat { text-align: center; }
+
+  .header-stat .num {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    font-weight: 900;
+    color: #fff;
+  }
+
+  .header-stat .label {
+    font-size: 10px;
+    color: rgba(255,255,255,0.35);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+    margin-top: 2px;
+  }
+
+  /* ---- SECTION LABELS ---- */
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.25);
+    margin-bottom: 20px;
+    margin-top: 12px;
+    padding-left: 2px;
+  }
+
+  /* ---- THEME CARDS ---- */
+  .themes-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 48px;
+  }
+
+  .theme-card {
+    background: rgba(255,255,255,0.025);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 14px;
+    padding: 20px 22px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .theme-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 3px; height: 100%;
+    border-radius: 3px 0 0 3px;
+    opacity: 0.6;
+    transition: opacity 0.25s;
+  }
+
+  .theme-card:hover {
+    background: rgba(255,255,255,0.04);
+    border-color: rgba(255,255,255,0.1);
+  }
+
+  .theme-card:hover::before { opacity: 1; }
+
+  .theme-card.expanded {
+    background: rgba(255,255,255,0.045);
+    border-color: rgba(255,255,255,0.12);
+  }
+
+  .theme-card.expanded::before { opacity: 1; }
+
+  .theme-top {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .theme-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+    background: rgba(255,255,255,0.04);
+  }
+
+  .theme-content { flex: 1; min-width: 0; }
+
+  .theme-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .theme-name .arrow {
+    font-size: 9px;
+    opacity: 0.25;
+    transition: transform 0.25s;
+    color: #63b4ff;
+  }
+
+  .theme-card.expanded .theme-name .arrow {
+    transform: rotate(90deg);
+    opacity: 0.6;
+  }
+
+  .theme-desc {
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+
+  .theme-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .speaker-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    flex: 1;
+  }
+
+  .speaker-tag {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.06);
+    color: rgba(255,255,255,0.5);
+    white-space: nowrap;
+  }
+
+  .theme-bar-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 120px;
+  }
+
+  .theme-bar {
+    flex: 1;
+    height: 4px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .theme-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    transition: width 0.5s ease;
+  }
+
+  .theme-bar-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.3);
+    white-space: nowrap;
+  }
+
+  /* ---- EXPANDED COMMENTS ---- */
+  .theme-comments {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, margin-top 0.3s ease;
+    margin-top: 0;
+  }
+
+  .theme-card.expanded .theme-comments {
+    max-height: 600px;
+    margin-top: 16px;
+  }
+
+  .comments-inner {
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .comment-header {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: rgba(255,255,255,0.2);
+    margin-bottom: 12px;
+  }
+
+  .comment-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+    align-items: flex-start;
+  }
+
+  .comment-pip {
+    width: 5px;
+    min-height: 28px;
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  .comment-body { flex: 1; }
+
+  .comment-text {
+    font-size: 12px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+  .comment-author {
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.25);
+    margin-top: 3px;
+  }
+
+  /* ---- SENTIMENT GRID ---- */
+  .sentiment-section { margin-bottom: 48px; }
+
+  .sentiment-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+  }
+
+  @media (max-width: 640px) {
+    .sentiment-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .sentiment-card {
+    background: rgba(255,255,255,0.025);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 16px 12px;
+    text-align: center;
+  }
+
+  .sentiment-emoji { font-size: 24px; margin-bottom: 8px; }
+
+  .sentiment-label-text {
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.35);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+
+  .sentiment-pct {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: #fff;
+  }
+
+  .sentiment-bar-outer {
+    width: 100%;
+    height: 3px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 2px;
+    margin-top: 10px;
+    overflow: hidden;
+  }
+
+  .sentiment-bar-inner {
+    height: 100%;
+    border-radius: 2px;
+  }
+
+  /* ---- CALLOUT ---- */
+  .callout {
+    background: rgba(255,152,0,0.06);
+    border: 1px solid rgba(255,152,0,0.2);
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-bottom: 48px;
+  }
+
+  .callout-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: #ffb74d;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .callout-text {
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.7;
+  }
+
+  /* ---- REACTIONS ROW ---- */
+  .reactions-row {
+    display: flex;
+    gap: 16px;
+    align-items: stretch;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+  }
+
+  .donut-card {
+    background: rgba(255,255,255,0.025);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 14px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 190px;
+  }
+
+  .reactions-list {
+    flex: 1;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .reaction-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255,255,255,0.025);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 9px;
+    padding: 9px 14px;
+  }
+
+  .reaction-emoji { font-size: 17px; }
+  .reaction-name { font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.5); flex: 1; }
+  .reaction-count { font-size: 15px; font-weight: 800; color: #fff; }
+  .reaction-pct { font-size: 10px; color: rgba(255,255,255,0.25); font-weight: 600; min-width: 36px; text-align: right; }
+
+  /* ---- FOOTER ---- */
+  .footer-note {
+    text-align: center;
+    font-size: 10px;
+    color: rgba(255,255,255,0.15);
+    padding: 8px 0;
+    letter-spacing: 0.3px;
+  }
+
+  /* ---- ANIMATIONS ---- */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(12px);
+    animation: fadeUp 0.5s ease forwards;
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header fade-in" style="animation-delay:0.1s">
+    <div class="header-eyebrow">LinkedIn Post Analysis</div>
+    <h1>London Tech Week <span>2025</span></h1>
+    <div class="subtitle">Keynote themes and audience reaction mapped across 36 main-event LinkedIn posts and 180 comments</div>
+    <div class="header-stats">
+      <div class="header-stat"><div class="num">45k+</div><div class="label">Attendees</div></div>
+      <div class="header-stat"><div class="num">140+</div><div class="label">Countries</div></div>
+      <div class="header-stat"><div class="num">500+</div><div class="label">Speakers</div></div>
+      <div class="header-stat"><div class="num">6</div><div class="label">Stages</div></div>
+    </div>
+  </div>
+
+  <div class="section-label fade-in" style="animation-delay:0.2s">Keynote Themes — click to explore audience reaction</div>
+
+  <div class="themes-grid" id="themes-grid"></div>
+
+  <div class="section-label fade-in" style="animation-delay:0.3s">Comment Sentiment Breakdown</div>
+
+  <div class="sentiment-section fade-in" style="animation-delay:0.35s">
+    <div class="sentiment-grid">
+      <div class="sentiment-card">
+        <div class="sentiment-emoji">🎉</div>
+        <div class="sentiment-label-text">Celebratory</div>
+        <div class="sentiment-pct">52%</div>
+        <div class="sentiment-bar-outer"><div class="sentiment-bar-inner" style="width:52%; background:#4caf50;"></div></div>
+      </div>
+      <div class="sentiment-card">
+        <div class="sentiment-emoji">🚀</div>
+        <div class="sentiment-label-text">Optimistic</div>
+        <div class="sentiment-pct">24%</div>
+        <div class="sentiment-bar-outer"><div class="sentiment-bar-inner" style="width:24%; background:#42a5f5;"></div></div>
+      </div>
+      <div class="sentiment-card">
+        <div class="sentiment-emoji">💬</div>
+        <div class="sentiment-label-text">Substantive</div>
+        <div class="sentiment-pct">14%</div>
+        <div class="sentiment-bar-outer"><div class="sentiment-bar-inner" style="width:14%; background:#ab47bc;"></div></div>
+      </div>
+      <div class="sentiment-card">
+        <div class="sentiment-emoji">⚡</div>
+        <div class="sentiment-label-text">Critical</div>
+        <div class="sentiment-pct">7%</div>
+        <div class="sentiment-bar-outer"><div class="sentiment-bar-inner" style="width:7%; background:#ffa726;"></div></div>
+      </div>
+      <div class="sentiment-card">
+        <div class="sentiment-emoji">🔥</div>
+        <div class="sentiment-label-text">Controversy</div>
+        <div class="sentiment-pct">3%</div>
+        <div class="sentiment-bar-outer"><div class="sentiment-bar-inner" style="width:3%; background:#ef5350;"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout fade-in" style="animation-delay:0.4s">
+    <div class="callout-title">⚠️ Flashpoint: Inclusion Controversy</div>
+    <div class="callout-text">A mother with an 8-month-old baby was refused entry to the event, sparking the most critical comment thread in the dataset. Multiple commenters highlighted the contradiction of having a breastfeeding area on-site while barring mothers with infants. The thread drew sustained attention across several posts and became the most visible point of negative sentiment around LTW 2025.</div>
+  </div>
+
+  <div class="section-label fade-in" style="animation-delay:0.45s">LinkedIn Reaction Types</div>
+
+  <div class="reactions-row fade-in" style="animation-delay:0.5s">
+    <div class="donut-card">
+      <svg width="150" height="150" viewBox="0 0 150 150">
+        <circle cx="75" cy="75" r="56" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="16"/>
+        <circle cx="75" cy="75" r="56" fill="none" stroke="#0077b5" stroke-width="16"
+          stroke-dasharray="317 352" stroke-dashoffset="0" transform="rotate(-90 75 75)" stroke-linecap="round"/>
+        <circle cx="75" cy="75" r="56" fill="none" stroke="#ef5350" stroke-width="16"
+          stroke-dasharray="17 335" stroke-dashoffset="-317" transform="rotate(-90 75 75)"/>
+        <circle cx="75" cy="75" r="56" fill="none" stroke="#66bb6a" stroke-width="16"
+          stroke-dasharray="13 339" stroke-dashoffset="-334" transform="rotate(-90 75 75)"/>
+        <text x="75" y="70" text-anchor="middle" font-family="Fraunces" font-size="26" font-weight="800" fill="#fff">379</text>
+        <text x="75" y="88" text-anchor="middle" font-size="9" font-weight="600" fill="rgba(255,255,255,0.3)" font-family="DM Sans" letter-spacing="1">REACTIONS</text>
+      </svg>
+    </div>
+    <div class="reactions-list">
+      <div class="reaction-row"><span class="reaction-emoji">👍</span><span class="reaction-name">Like</span><span class="reaction-count">342</span><span class="reaction-pct">90.2%</span></div>
+      <div class="reaction-row"><span class="reaction-emoji">❤️</span><span class="reaction-name">Empathy</span><span class="reaction-count">18</span><span class="reaction-pct">4.7%</span></div>
+      <div class="reaction-row"><span class="reaction-emoji">👏</span><span class="reaction-name">Praise</span><span class="reaction-count">14</span><span class="reaction-pct">3.7%</span></div>
+      <div class="reaction-row"><span class="reaction-emoji">💡</span><span class="reaction-name">Insightful</span><span class="reaction-count">2</span><span class="reaction-pct">0.5%</span></div>
+      <div class="reaction-row"><span class="reaction-emoji">😄</span><span class="reaction-name">Entertainment</span><span class="reaction-count">2</span><span class="reaction-pct">0.5%</span></div>
+      <div class="reaction-row"><span class="reaction-emoji">🤔</span><span class="reaction-name">Interest</span><span class="reaction-count">1</span><span class="reaction-pct">0.3%</span></div>
+    </div>
+  </div>
+
+  <div class="footer-note">Analysis of 36 LTW 2025 main-event posts from the London Tech Week LinkedIn page · 379 reactions · 180 comments</div>
+
+</div>
+
+<script>
+const themes = [
+  {
+    icon: '🏗️', color: '#0077b5', name: 'AI as National Infrastructure',
+    desc: 'The dominant keynote narrative. Jensen Huang (NVIDIA) framed AI as essential infrastructure — like electricity — that nations must invest in. PM Keir Starmer reinforced this on the Main Stage opening.',
+    speakers: ['Jensen Huang', 'Keir Starmer', 'Darren Hardman'],
+    posts: 8, barPct: 95,
+    comments: [
+      { text: '"AI is the new infrastructure" that countries and businesses need, like electricity.', author: 'Takeaway from NVIDIA CEO keynote', sentiment: '#42a5f5' },
+      { text: 'Inspiring! The UK\'s tech ecosystem is thriving, and Microsoft\'s investment is a massive vote of confidence.', author: 'Mokter Hossain', sentiment: '#4caf50' },
+      { text: 'The fight for trust in AI won\'t be won in cloud servers — it\'ll be won face-to-face, in stores, in real conversations.', author: 'Ian Johnston', sentiment: '#ab47bc' },
+      { text: 'As Agentic AI systems evolve from passive LLMs to autonomous decision-makers, nations that combine strong research, ethical frameworks, and robust compute ecosystems will define the future.', author: 'Luiz Carlos de Castro Júnior', sentiment: '#ab47bc' }
+    ]
+  },
+  {
+    icon: '💰', color: '#43a047', name: 'UK Tech Investment Surge',
+    desc: 'Billions committed by Microsoft (£22B), NVIDIA, Google, Salesforce and CoreWeave. Positioned as a landmark vote of confidence in the UK tech ecosystem and its AI, cloud and data centre capacity.',
+    speakers: ['Microsoft', 'NVIDIA', 'Google', 'Salesforce', 'CoreWeave'],
+    posts: 6, barPct: 80,
+    comments: [
+      { text: 'A truly outstanding set of announcements. Now the real challenge begins — as a nation, we must deliver.', author: 'Matthew Morley', sentiment: '#ffa726' },
+      { text: 'Incredible news for the UK which will eventually translate to more jobs in this sector.', author: 'Jacqui Lapping', sentiment: '#4caf50' },
+      { text: 'That\'s a significant bet on UK tech. Feels like we\'re at the start of something big with AI.', author: 'Parikshit Pruthi', sentiment: '#42a5f5' }
+    ]
+  },
+  {
+    icon: '🚀', color: '#ff7043', name: 'Startup Ecosystem at Scale',
+    desc: 'Tech Nation\'s 2025 report launched on the Main Stage: UK tech valued at $1.2T, startups raising $7B in H1 2025. The Pitch Booth and Future Fifty cohort showcased founder energy.',
+    speakers: ['Tech Nation', 'Marco De Novellis', 'Future Fifty'],
+    posts: 7, barPct: 75,
+    comments: [
+      { text: 'Excellent report, but it hides the real story. 59% of UK tech value sits in London. Regional ecosystems are still fighting gravity.', author: 'Wayne Horkan', sentiment: '#ffa726' },
+      { text: 'The UK tech sector has reached $1.2 trillion — but the real challenge now is accessing the right capital to fuel the next wave.', author: 'Sahro Ali', sentiment: '#ab47bc' },
+      { text: 'Loved getting to pitch in the booth at London Tech Week! Brilliant opportunity.', author: 'Dr Chelsea Jarvie', sentiment: '#4caf50' }
+    ]
+  },
+  {
+    icon: '🌍', color: '#5c6bc0', name: 'Global Tech Diplomacy',
+    desc: '140+ countries represented. Poland sent 184 delegates (largest European delegation); nearly 450 European business reps attended overall. LTW positioned as a cross-border partnership platform.',
+    speakers: ['British Embassy Warsaw', 'Chris Barton CMG', 'ElevenLabs'],
+    posts: 4, barPct: 50,
+    comments: [
+      { text: 'An absolute pleasure to lead such a fantastic and dynamic Polish delegation! The energy and collaboration truly showcased Poland\'s tech ecosystem.', author: 'Magdalena Mariankowska', sentiment: '#4caf50' },
+      { text: 'What an incredible milestone! Inspiring to see such strong collaboration between the UK and European tech ecosystems.', author: 'Magdalena Mariankowska', sentiment: '#42a5f5' }
+    ]
+  },
+  {
+    icon: '🔬', color: '#ab47bc', name: 'Cross-Industry AI Adoption',
+    desc: 'Healthcare (AstraZeneca, GSK) and mining (Rio Tinto) brought AI use cases to the Main Stage. AI transformation isn\'t just for tech companies — it\'s reshaping pharma, materials and beyond.',
+    speakers: ['AstraZeneca', 'GSK', 'Rio Tinto', 'HSBC'],
+    posts: 5, barPct: 55,
+    comments: [
+      { text: 'These 3 days proved that progress accelerates when industry, academia and start-ups work together.', author: 'Rio Tinto', sentiment: '#42a5f5' },
+      { text: 'Inspiring to see how the Rio management team have made mining the coolest field for new graduates.', author: 'Robert Stoner', sentiment: '#4caf50' },
+      { text: 'We\'re at a transformational moment in health. We can prevent and change the course of disease better and faster than ever.', author: 'GSK', sentiment: '#42a5f5' }
+    ]
+  },
+  {
+    icon: '🤖', color: '#00897b', name: 'AI as Co-Founder',
+    desc: 'A dedicated panel explored how AI is being leveraged as a literal business co-founder — transforming models, enabling solo founders, and reshaping the startup playbook.',
+    speakers: ['Zahra Shah', 'Brett Martin', 'Angie Ma', 'Bindi Karia'],
+    posts: 2, barPct: 30,
+    comments: [
+      { text: 'In moments of disruption, the perspective we choose can either cause us to react in fear and retreat or open our eyes to new possibilities.', author: 'Attendee reflection', sentiment: '#ab47bc' },
+      { text: '"We must embrace this future and take more risk" — nearly every forward-thinking speaker said this.', author: 'Keynote takeaway', sentiment: '#42a5f5' }
+    ]
+  },
+  {
+    icon: '👩‍💻', color: '#e91e63', name: 'Inclusion & Women in Tech',
+    desc: 'InspiringFifty honoured 50 women shaping UK tech. Alison Rose and Elif Shafak headlined. However, the inclusion narrative was complicated by the baby exclusion controversy.',
+    speakers: ['InspiringFifty', 'Alison Rose', 'Elif Shafak', 'Kate Smaje'],
+    posts: 3, barPct: 40,
+    comments: [
+      { text: '"Inspiring" is certainly the perfect word. What a delight to have Elif Shafak in conversation too.', author: 'Rebecca Drewnicki', sentiment: '#4caf50' },
+      { text: 'Not letting a Mum with her kid in is not really acceptable. I wouldn\'t want to go near this conference now.', author: 'Martin Masser', sentiment: '#ef5350' },
+      { text: 'That\'s ridiculous when you have a "Breastfeeding" area at the event not to allow a mother with a child inside.', author: 'Dasha Timbush', sentiment: '#ef5350' },
+      { text: 'Can you all reach out to the mother who was refused entry? It\'s very important for London Tech Week to be inclusive.', author: 'Ariana The Techie', sentiment: '#ffa726' }
+    ]
+  },
+  {
+    icon: '🎨', color: '#78909c', name: 'Creative Tech & Future Play',
+    desc: 'A new installation in collaboration with UAL Creative Computing Institute placed interactive generative art at the centre of the show floor — attendees became real-time collaborators.',
+    speakers: ['UAL Creative Computing Institute', 'Dojo Films'],
+    posts: 3, barPct: 25,
+    comments: [
+      { text: 'Consistency and authenticity are the real game-changers.', author: 'Ashish Sandhu', sentiment: '#ab47bc' },
+      { text: 'We loved seeing attendees step in front of the screens, playing, interacting, becoming collaborators with the art.', author: 'London Tech Week', sentiment: '#4caf50' }
+    ]
+  }
+];
+
+const grid = document.getElementById('themes-grid');
+
+themes.forEach((t, i) => {
+  const card = document.createElement('div');
+  card.className = 'theme-card fade-in';
+  card.style.animationDelay = (0.25 + i * 0.06) + 's';
+  card.style.setProperty('--accent', t.color);
+  card.querySelector
+  card.onclick = () => card.classList.toggle('expanded');
+
+  const commentsHtml = t.comments.map(c => `
+    <div class="comment-item">
+      <div class="comment-pip" style="background:${c.sentiment}"></div>
+      <div class="comment-body">
+        <div class="comment-text">"${c.text}"</div>
+        <div class="comment-author">— ${c.author}</div>
+      </div>
+    </div>
+  `).join('');
+
+  const speakersHtml = t.speakers.map(s => `<span class="speaker-tag">${s}</span>`).join('');
+
+  card.innerHTML = `
+    <style>.theme-card:nth-child(${i+1})::before { background: ${t.color}; }</style>
+    <div class="theme-top">
+      <div class="theme-icon">${t.icon}</div>
+      <div class="theme-content">
+        <div class="theme-name">${t.name} <span class="arrow">▶</span></div>
+        <div class="theme-desc">${t.desc}</div>
+        <div class="theme-meta">
+          <div class="speaker-tags">${speakersHtml}</div>
+          <div class="theme-bar-wrap">
+            <div class="theme-bar"><div class="theme-bar-fill" style="width:${t.barPct}%; background:${t.color}"></div></div>
+            <div class="theme-bar-label">${t.posts} posts</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="theme-comments">
+      <div class="comments-inner">
+        <div class="comment-header">Audience Voice — representative comments</div>
+        ${commentsHtml}
+      </div>
+    </div>
+  `;
+
+  grid.appendChild(card);
+});
+</script>
+</body>
+</html>
